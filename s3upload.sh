@@ -14,7 +14,7 @@ if ! command -v aws &> /dev/null; then
 fi
 
 # iterate through all the job directories
-for job_dir in "JENKINS_HOME/jobs/"*/; do 
+for job_dir in "$JENKINS_HOME/jobs/"*/; do 
     job_name=$(basename "$job_dir")
 
     #iterate through build directories for all the jobs
