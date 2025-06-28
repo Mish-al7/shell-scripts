@@ -1,0 +1,16 @@
+#!/bin/bash
+#spcript to upload env files in to ssm
+#configure aws first
+prefix="/myapp/config"
+
+while IFS='=' read -r key value; do
+  if [[ -n "$key" && -n "$value" && ! "$key" =~ ^# ]]; then
+    echo "Uploading $prefix/$key"
+    aws ssm put-parameter \
+      --name "$prefix/$key" \
+      --value "$value" \
+      --type "String" \
+      --overwrite \
+      --region <aws-region>
+  fi
+done < <env-file-name>
